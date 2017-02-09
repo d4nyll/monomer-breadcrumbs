@@ -32,7 +32,7 @@
           computed: 'calculateColoredItems(items, color)'
         }
       },
-      calculateColoredItems: (items, color) => {
+      calculateColoredItems: function (items, color) {
         // RegEx obtained from https://github.com/regexhq/hsla-regex
         const hslaColorRegEx = /^hsla\((\d+),\s*([\d.]+)%,\s*([\d.]+)%,\s*(\d*(?:\.\d+)?)\)$/;
         const [,h,s,l,a] = color.match(hslaColorRegEx);
