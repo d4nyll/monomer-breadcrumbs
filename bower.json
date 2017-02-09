@@ -1,0 +1,27 @@
+{
+  "name": "monomer-breadcrumbs",
+  "authors": [
+    "Daniel Li <dan@danyll.com>"
+  ],
+  "description": "Breadcrumbs Polymer element",
+  "main": "monomer-breadcrumbs.html",
+  "keywords": [
+    "polymer",
+    "breadcrumbs"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+
+    "polymer": "^1.8.0",
+    "promise-polyfill": "^1.0.0",
+    "monomer-breadcrumbs-item": "^0.0.1"
+  }
+}

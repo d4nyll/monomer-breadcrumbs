@@ -1,0 +1,48 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../monomer-breadcrumbs-item/monomer-breadcrumbs-item.html">
+
+<dom-module id="monomer-breadcrumbs">
+  <template>
+    <style>
+      .container {
+        display: flex;
+      }
+    </style>
+    <div class="container">
+      <template is="dom-repeat" items="[[coloredItem]]">
+        <monomer-breadcrumbs-item text="[[item.text]]" color="[[item.color]]" order="[[item.order]]"></monomer-breadcrumbs-item>
+      </template>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'monomer-breadcrumbs',
+      properties: {
+        items: {
+          type: Array,
+          value: [],
+        },
+        color: {
+          type: String,
+          value: "hsla(39, 100%, 75%, 1)",
+        },
+        coloredItem: {
+          type: Array,
+          value: [],
+          computed: 'calculateColoredItems(items, color)'
+        }
+      },
+      calculateColoredItems: (items, color) => {
+        // RegEx obtained from https://github.com/regexhq/hsla-regex
+        const hslaColorRegEx = /^hsla\((\d+),\s*([\d.]+)%,\s*([\d.]+)%,\s*(\d*(?:\.\d+)?)\)$/;
+        const [,h,s,l,a] = color.match(hslaColorRegEx);
+        return items.map((item, i) => ({
+          text: item,
+          color: `hsla(${h}, ${s}%, ${(100 - ((100 - l)/(i+1))) }%, ${a})`,
+          // color: `hsla(${h}, ${s}%, ${((100*i)+l)/(i+1)}%, ${a})`,
+          order: i,
+        })).reverse();
+      }
+    });
+  </script>
+</dom-module>
