@@ -34,14 +34,19 @@
       },
       calculateColoredItems: function (items, color) {
         // RegEx obtained from https://github.com/regexhq/hsla-regex
-        const hslaColorRegEx = /^hsla\((\d+),\s*([\d.]+)%,\s*([\d.]+)%,\s*(\d*(?:\.\d+)?)\)$/;
-        const [,h,s,l,a] = color.match(hslaColorRegEx);
-        return items.map((item, i) => ({
-          text: item,
-          color: `hsla(${h}, ${s}%, ${(100 - ((100 - l)/(i+1))) }%, ${a})`,
-          // color: `hsla(${h}, ${s}%, ${((100*i)+l)/(i+1)}%, ${a})`,
-          order: i,
-        })).reverse();
+        var hslaColorRegEx = /^hsla\((\d+),\s*([\d.]+)%,\s*([\d.]+)%,\s*(\d*(?:\.\d+)?)\)$/;
+        var colorData = color.match(hslaColorRegEx);
+        var h = colorData[1];
+        var s = colorData[2];
+        var l = colorData[3];
+        var a = colorData[4];
+        return items.map(function (item, i) {
+          return {
+            text: item,
+            color: "hsla(" + h + ", " + s + "%, " + (100 - (100 - l) / (i + 1)) + "%, " + a + ")",
+            order: i,
+          }
+        }).reverse();
       }
     });
   </script>
